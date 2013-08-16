@@ -17,4 +17,3 @@ These are my benchmarks so far
  500000000	         5.45 ns/op
  Fast way IV
  500000000	         4.64 ns/op
-'''
