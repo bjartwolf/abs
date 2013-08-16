@@ -9,35 +9,37 @@ import ("fmt"
 
 var cpuprofile = flag.String("cpuprofile", "", "write cpu profile to file")
 
-func SaneAbs (num int) int {
-  if num < 0 {
-    return -num
-  } else {
+func SaneAbs (num int8) int8 {
+  if num > 0 {
     return num
+  } else {
+    return -num
   }
 }
 
-func InSaneAbs (num int) int {
-  y := num>>63
+func InSaneAbs (num int8) int8 {
+  y := num>>7
   return (num ^ y) - y
 }
 
-func InSaneAbs2 (num int) int {
-  y := num>>63
+func InSaneAbs2 (num int8) int8 {
+  y := num>>7
   return (num+y) ^ y
 }
-func InSaneAbs3 (num int) int {
-  return num - (2*num & (num>>63))
+func InSaneAbs3 (num int8) int8 {
+  return num - (2*num & (num>>7))
 }
 
-func InSaneAbs4 (num int) int {
-  return ((num >> 63) | 1) * num
+func InSaneAbs4 (num int8) int8 {
+  return ((num >> 7) | 1) * num
 }
 
 
 func SaneWay(b *testing.B) {
-  a := -42
-  c := 13
+  var a int8
+  var c int8
+  a = -42
+  c = 13
   x := a
 	for i := 0; i < b.N; i++ {
     x = a^c^x
@@ -45,17 +47,22 @@ func SaneWay(b *testing.B) {
 	}
 }
 func FastWay1(b *testing.B) {
-  a := -42
-  c := 13
+  var a int8
+  var c int8
+  a = -42
+  c = 13
   x := a
 	for i := 0; i < b.N; i++ {
     x = a^c^x
+    InSaneAbs(x)
 	}
 }
 
 func FastWay2(b *testing.B) {
-  a := -42
-  c := 13
+  var a int8
+  var c int8
+  a = -42
+  c = 13
   x := a
 	for i := 0; i < b.N; i++ {
     x = a^c^x
@@ -64,8 +71,10 @@ func FastWay2(b *testing.B) {
 }
 
 func FastWay3(b *testing.B) {
-  a := -42
-  c := 13
+  var a int8
+  var c int8
+  a = -42
+  c = 13
   x := a
 	for i := 0; i < b.N; i++ {
     x = a^c^x
@@ -74,8 +83,10 @@ func FastWay3(b *testing.B) {
 }
 
 func FastWay4(b *testing.B) {
-  a := -42
-  c := 13
+  var a int8
+  var c int8
+  a = -42
+  c = 13
   x := a
 	for i := 0; i < b.N; i++ {
     x = a^c^x
