@@ -1,10 +1,10 @@
 package main
 import ("fmt"
-	"testing"
-	"flag"
-	"os"
-	"log"
-	"runtime/pprof"
+        "testing"
+        "flag"
+        "os"
+        "log"
+        "runtime/pprof"
 )
 
 var cpuprofile = flag.String("cpuprofile", "", "write cpu profile to file")
@@ -35,84 +35,69 @@ func InSaneAbs4 (num int8) int8 {
 }
 
 
+var numbers  = [10]int8{-32,44,42,0,-24,2,4,42,-24,-32}
+var posNumbers  = [10]int8{32,44,42,0,24,2,4,42,24,33}
+
 func SaneWay(b *testing.B) {
-  var a int8
-  var c int8
-  a = -42
-  c = 13
-  x := a
-	for i := 0; i < b.N; i++ {
-    x = a^c^x
-    SaneAbs(x)
+  for i := 0; i < b.N; i++ {
+    for i, number := range numbers {
+      if (SaneAbs(number) != posNumbers[i]) {
+	panic(fmt.Sprintf("Number is not correct. %d - %d - %d\n", number, SaneAbs(number), posNumbers[i]))
 	}
+    }
+  }
 }
 func FastWay1(b *testing.B) {
-  var a int8
-  var c int8
-  a = -42
-  c = 13
-  x := a
-	for i := 0; i < b.N; i++ {
-    x = a^c^x
-    InSaneAbs(x)
-	}
+  for i := 0; i < b.N; i++ {
+    for _, number := range numbers {
+      InSaneAbs(number)
+    }
+  }
 }
 
 func FastWay2(b *testing.B) {
-  var a int8
-  var c int8
-  a = -42
-  c = 13
-  x := a
-	for i := 0; i < b.N; i++ {
-    x = a^c^x
-    InSaneAbs2(x)
-	}
+  for i := 0; i < b.N; i++ {
+    for _, number := range numbers {
+      InSaneAbs2(number)
+    }
+  }
 }
 
 func FastWay3(b *testing.B) {
-  var a int8
-  var c int8
-  a = -42
-  c = 13
-  x := a
-	for i := 0; i < b.N; i++ {
-    x = a^c^x
-    InSaneAbs3(x)
-	}
+  for i := 0; i < b.N; i++ {
+    for _, number := range numbers {
+      InSaneAbs3(number)
+    }
+  }
 }
 
 func FastWay4(b *testing.B) {
-  var a int8
-  var c int8
-  a = -42
-  c = 13
-  x := a
-	for i := 0; i < b.N; i++ {
-    x = a^c^x
-    InSaneAbs4(x)
-	}
+  for i := 0; i < b.N; i++ {
+    for _, number := range numbers {
+      InSaneAbs4(number)
+    }
+  }
 }
 
 
 func main () {
-	flag.Parse()
-	if *cpuprofile != "" {
-		f, err := os.Create(*cpuprofile)
-		if err != nil {
-			log.Fatal(err)
-		}
-		pprof.StartCPUProfile(f)
-		defer pprof.StopCPUProfile()
-	}
-	fmt.Println("Sane way")
-  fmt.Println(testing.Benchmark(SaneWay))
-	fmt.Println("Fast way I")
-	fmt.Println(testing.Benchmark(FastWay1))
-	fmt.Println("Fast way II")
-	fmt.Println(testing.Benchmark(FastWay2))
-	fmt.Println("Fast way III")
-	fmt.Println(testing.Benchmark(FastWay3))
-	fmt.Println("Fast way IV")
-	fmt.Println(testing.Benchmark(FastWay4))
+        flag.Parse()
+        if *cpuprofile != "" {
+                f, err := os.Create(*cpuprofile)
+                if err != nil {
+                        log.Fatal(err)
+                }
+                pprof.StartCPUProfile(f)
+                defer pprof.StopCPUProfile()
+        }
+        fmt.Println("Sane way")
+        fmt.Println(testing.Benchmark(SaneWay))
+        fmt.Println("Fast way I")
+        fmt.Println(testing.Benchmark(FastWay1))
+        fmt.Println("Fast way II")
+        fmt.Println(testing.Benchmark(FastWay2))
+        fmt.Println("Fast way III")
+        fmt.Println(testing.Benchmark(FastWay3))
+        fmt.Println("Fast way IV")
+        fmt.Println(testing.Benchmark(FastWay4))
 }
