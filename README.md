@@ -9,29 +9,22 @@ go test -bench .
 These are my benchmarks so far
 ==============================
 On my dell XPS 13 with Ubuntu 12.04, kernel 3.8.something I think
-```shell
-Sane way
-500000000	         3.64 ns/op
-Fast way I
-500000000	         4.40 ns/op
-Fast way II
-500000000	         4.40 ns/op
-Fast way III
-500000000	         5.45 ns/op
-Fast way IV
-500000000	         4.77 ns/op
-```
+...Outdated
 
 On my Surface Pro with Windows 8 
+It seems 8 bit numbers are faster with method 4 (involving multiplication) but the fastest in general in method 1.
+
 ```shell
-Sane way
-2000000000	         1.08 ns/op
-Fast way I
-2000000000	         1.26 ns/op
-Fast way II
-2000000000	         1.22 ns/op
-Fast way III
-2000000000	         1.67 ns/op
-Fast way IV
-2000000000	         1.24 ns/op
+PASS
+BenchmarkSaneAbs8	50000000	        28.2 ns/op
+BenchmarkInSaneAbs8	100000000	        21.2 ns/op
+BenchmarkInSaneAbs82	100000000	        21.2 ns/op
+BenchmarkInSaneAbs83	100000000	        22.9 ns/op
+BenchmarkInSaneAbs84	100000000	        18.1 ns/op
+BenchmarkSaneAbs	100000000	        26.7 ns/op
+BenchmarkInSaneAbs	100000000	        21.2 ns/op
+BenchmarkInSaneAbs2	100000000	        21.7 ns/op
+BenchmarkInSaneAbs3	100000000	        25.1 ns/op
+BenchmarkInSaneAbs4	100000000	        24.2 ns/op
+ok  	github.com/bjartwolf/abs	22.028s
 ```

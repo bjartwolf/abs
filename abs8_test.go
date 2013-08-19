@@ -2,10 +2,11 @@ package abs
 import (
 	"testing"
 	"fmt"
+	"math"
 )
 
-var posNumbers8  = [10]int8{34,23,42,0,24,2,4,42,24,32}
-var numbers8  = [10]int8{-34,-23,-42,0,-24,2,-4,-42,-24,-32}
+var posNumbers8  = [10]int8{34,23,42,0,24,2,4,42,24,math.MaxInt8}
+var numbers8  = [10]int8{-34,-23,-42,0,-24,2,-4,-42,-24,-math.MaxInt8}
 
 func TestSaneAbs8(t *testing.T) {
     for i, number := range numbers8 {
