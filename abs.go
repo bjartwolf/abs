@@ -36,7 +36,7 @@ func InSaneAbs4 (num int) int {
 
 
 var numbers  = [10]int{-32,44,42,0,-24,2,4,42,-24,-32}
-var posNumbers  = [10]int{32,44,42,0,24,2,4,42,24,33}
+var posNumbers  = [10]int{32,44,42,0,24,2,4,42,24,32}
 
 func SaneWay(b *testing.B) {
   for i := 0; i < b.N; i++ {
