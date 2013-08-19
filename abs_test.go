@@ -2,10 +2,11 @@ package abs
 import (
 	"testing"
 	"fmt"
+	"math"
 )
 
-var posNumbers  = [10]int{340,4253656356263,454265436245435,0,24,2324542544354352,4,42,24,32}
-var numbers  = [10]int{-340,-4253656356263,-454265436245435,0,-24,2324542544354352,-4,-42,-24,-32}
+var posNumbers  = [10]int{340,4253656356263,454265436245435,0,24,2324542544354352,4,42,24,math.MaxInt64}
+var numbers  = [10]int{-340,-4253656356263,-454265436245435,0,-24,2324542544354352,-4,-42,-24,-math.MaxInt64}
 
 func TestSaneAbs(t *testing.T) {
     for i, number := range numbers {
