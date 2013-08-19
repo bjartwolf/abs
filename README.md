@@ -4,6 +4,8 @@ abs
 Absolute value in Go using Hacker's delight tricks
 So far not able to speed things up... 
 
+go test -bench .
+
 These are my benchmarks so far
 ==============================
 On my dell XPS 13 with Ubuntu 12.04, kernel 3.8.something I think
