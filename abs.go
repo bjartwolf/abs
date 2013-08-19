@@ -1,13 +1,4 @@
-package main
-import ("fmt"
-        "testing"
-        "flag"
-        "os"
-        "log"
-        "runtime/pprof"
-)
-
-var cpuprofile = flag.String("cpuprofile", "", "write cpu profile to file")
+package abs
 
 func SaneAbs (num int) int {
   if num > 0 {
@@ -33,17 +24,11 @@ func InSaneAbs3 (num int) int {
 func InSaneAbs4 (num int) int {
   return ((num >> 7) | 1) * num
 }
-
-
-var numbers  = [10]int{-32,44,42,0,-24,2,4,42,-24,-32}
-var posNumbers  = [10]int{32,44,42,0,24,2,4,42,24,32}
-
+/*
 func SaneWay(b *testing.B) {
   for i := 0; i < b.N; i++ {
     for i, number := range numbers {
-      if (SaneAbs(number) != posNumbers[i]) {
-	panic(fmt.Sprintf("Number is not correct. %d - %d - %d\n", number, SaneAbs(number), posNumbers[i]))
-	}
+	SaneAbs(number)
     }
   }
 }
@@ -79,9 +64,9 @@ func FastWay4(b *testing.B) {
   }
 }
 
-
 func main () {
         flag.Parse()
+var cpuprofile = flag.String("cpuprofile", "", "write cpu profile to file")
         if *cpuprofile != "" {
                 f, err := os.Create(*cpuprofile)
                 if err != nil {
@@ -101,3 +86,4 @@ func main () {
         fmt.Println("Fast way IV")
         fmt.Println(testing.Benchmark(FastWay4))
 }
+*/
